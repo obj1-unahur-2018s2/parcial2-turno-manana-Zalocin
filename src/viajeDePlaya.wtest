@@ -1,0 +1,25 @@
+import viajes.*
+
+describe "tests viajeDePlaya" {
+	var playa = new ViajeDePlaya()
+	
+	fixture {
+		playa.largoDeLaPlaya(1000)
+		
+	}
+
+	test "diasQueLlevaElViaje" {
+
+		assert.equals(1000/500, playa.diasDeActividad())
+	}
+	
+	test "implicaEsfuerzo" {
+		assert.notThat(playa.implicaEsfuerzo())
+	}
+	
+	test "sirveParaBroncearse" {
+		assert.that(playa.sirveParaBroncearse())
+	}
+	
+	
+}

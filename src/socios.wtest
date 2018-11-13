@@ -1,0 +1,61 @@
+import socios.*
+import viajes.*
+import gimnasia.*
+
+
+describe "tests socios" {
+	var roque = new SocioTranquilo()
+	var ana = new SocioTranquilo()
+	
+	var playa1 = new ViajeDePlaya()
+	var playa2 = new ViajeDePlaya()
+	
+	var gimnasio = new ClaseDeGimnasia()
+	
+	
+	fixture {		
+		playa1.largoDeLaPlaya(1000)
+		playa2.largoDeLaPlaya(2000)
+		
+		roque.cantidadDeActividadesMaxima(2)
+		ana.cantidadDeActividadesMaxima(3) 
+		
+		roque.agregarActividad(playa1)
+		roque.agregarActividad(playa2)
+		
+		ana.agregarActividad(playa1)
+		ana.agregarActividad(playa2)
+		ana.agregarActividad(gimnasio)
+		
+		
+		
+	}
+
+	test "RoqueEsAdoradorDelSol" {
+		assert.that(roque.esAdoradorDelSol())
+
+	}
+	test "anaEsAdoradorDelSol" {
+		assert.notThat(ana.esAdoradorDelSol())
+
+	}	
+	
+	test "RoqueActividadesForzadas" {
+		assert.equals(#{playa2}, roque.actividadesEsforzadas())
+
+	}
+	
+	test "AnaActividadesForzadas" {
+		assert.equals(#{playa2, gimnasio}, ana.actividadesEsforzadas())
+
+	}
+	
+	test "tira error" {
+   	 assert.throwsException ({roque.agregarActividad(gimnasio)})
+   	}
+	
+	test "Roque tira Error - No puede registrar actividad" {
+		assert.throwsExceptionWithMessage( "No puede registrar actividad", {roque.agregarActividad(gimnasio)} )
+			
+	}		
+}

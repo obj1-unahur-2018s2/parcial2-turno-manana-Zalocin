@@ -1,0 +1,61 @@
+import socios.*
+import viajes.*
+import gimnasia.*
+
+
+describe " tests tiposDeSocios - atraeActividad" {
+	var socioTranquilo = new SocioTranquilo()
+	var socioCoherente = new SocioCoherente()
+	var socioRelajado = new SocioRelajado()
+	
+	var playa1 = new ViajeDePlaya()
+	var playa2 = new ViajeDePlaya()
+	var ciudad1 = new ExcursionACiudad()
+	
+	
+	fixture {
+		playa1.largoDeLaPlaya(3000)
+		playa2.largoDeLaPlaya(1000)
+		
+		ciudad1.cantidadDeAtracciones(5)
+		ciudad1.agregarIdiomas(#{"Español","Ingles","Frances","Italiano"})
+		
+		
+		socioTranquilo.cantidadDeActividadesMaxima(2)
+		//socioTranquilo.agregarActividad(playa1)
+		//socioTranquilo.agregarActividad(playa2)
+		
+		socioCoherente.cantidadDeActividadesMaxima(3)		
+		//socioCoherente.agregarActividad(playa1)
+		//socioCoherente.agregarActividad(playa2)
+		//socioCoherente.agregarActividad(ciudad1)
+		
+		socioRelajado.cantidadDeActividadesMaxima(3)
+		socioRelajado.agregarIdiomas(#{"Ingles","Frances"})
+		//socioRelajado.agregarActividad(playa1)
+		
+	}
+	
+
+	test "socioTranquilo" {
+		assert.that(socioTranquilo.atraeActividad(playa1))
+		assert.notThat(socioTranquilo.atraeActividad(playa2))
+
+	}
+	
+	test "socioCoherente" {
+
+		assert.that(socioCoherente.atraeActividad(playa1))
+		assert.that(socioCoherente.atraeActividad(ciudad1))
+		
+		ciudad1.cantidadDeAtracciones(4)
+		assert.notThat(socioCoherente.atraeActividad(ciudad1))
+	
+
+	}
+	
+	test "socioRelajado" {
+		assert.notThat(socioRelajado.atraeActividad(playa1))
+		assert.that(socioRelajado.atraeActividad(ciudad1))
+	}
+}

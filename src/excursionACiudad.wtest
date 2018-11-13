@@ -1,0 +1,47 @@
+import viajes.*
+
+
+describe "tests excursionACiudad" {
+	var ciudad1 = new ExcursionACiudad()
+	var ciudad2 = new ExcursionACiudad()
+
+	fixture {
+	ciudad1.cantidadDeAtracciones(4)
+	ciudad2.cantidadDeAtracciones(8)
+	
+	ciudad1.agregarIdioma("Español")
+	ciudad2.agregarIdiomas(#{"Español","Ingles"})
+}
+
+	test "diasDeviajeCiudad1" {
+		assert.equals(4/2, ciudad1.diasDeActividad())
+	}
+	
+	test "diasDeviajeCiudad2" {
+		assert.equals(8/2, ciudad2.diasDeActividad())
+	}
+	
+	test "implicaEsfuerzoCiudad1" {
+		assert.notThat(ciudad1.implicaEsfuerzo())
+	}
+	
+	test "implicaEsfuerzoCiudad2" {
+		assert.that(ciudad2.implicaEsfuerzo())
+	}
+	
+	test "sirveParaBroncearseCiudad1" {
+		assert.notThat(ciudad1.sirveParaBroncearse())
+	}
+	
+	test "sirveParaBroncearseCiudad2" {
+		assert.notThat(ciudad2.sirveParaBroncearse())
+	}
+	
+	test "viajeInteresanteCiudad1" {
+		assert.notThat(ciudad1.viajeInteresante())
+	}
+	
+	test "viajeInteresanteCiudad2" {
+		assert.that(ciudad2.viajeInteresante())
+	}
+}

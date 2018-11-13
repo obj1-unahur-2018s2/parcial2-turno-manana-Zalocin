@@ -1,0 +1,67 @@
+import viajes.*
+
+describe "tests excursionACiudadTropical" {
+		var ciudadTropical1 = new ExcursionACiudadTropical()
+		var ciudadTropical2 = new ExcursionACiudadTropical()
+		var ciudadTropical3 = new ExcursionACiudadTropical()
+	
+	fixture {
+		ciudadTropical1.cantidadDeAtracciones(4)
+		ciudadTropical2.cantidadDeAtracciones(8)
+		ciudadTropical3.cantidadDeAtracciones(10)
+		
+		ciudadTropical1.agregarIdioma("Español")
+		ciudadTropical2.agregarIdiomas(#{"Español","Ingles"})
+		ciudadTropical2.agregarIdioma("Italiano")
+	
+	}
+
+	test "diasDeviajeCiudadTropical1" {
+		assert.equals((4/2)+1, ciudadTropical1.diasDeActividad())
+	}
+	
+	test "diasDeviajeCiudadTropical2" {
+		assert.equals((8/2)+1, ciudadTropical2.diasDeActividad())
+	}
+	
+	test "diasDeviajeCiudadTropical3" {
+		assert.equals((10/2)+1, ciudadTropical3.diasDeActividad())
+	}
+	
+	test "implicaEsfuerzoCiudadTropical1" {
+		assert.notThat(ciudadTropical1.implicaEsfuerzo())
+	}
+	
+	test "implicaEsfuerzoCiudadTropical2" {
+		assert.that(ciudadTropical2.implicaEsfuerzo())
+	}
+	
+	test "implicaEsfuerzoCiudadTropical3" {
+		assert.notThat(ciudadTropical3.implicaEsfuerzo())
+	}
+	
+	test "sirveParaBroncearseCiudadTropical1" {
+		assert.that(ciudadTropical1.sirveParaBroncearse())
+	}
+	
+	test "sirveParaBroncearseCiudadTropical2" {
+		assert.that(ciudadTropical2.sirveParaBroncearse())
+	}
+	
+	test "sirveParaBroncearseCiudadTropical3" {
+		assert.that(ciudadTropical3.sirveParaBroncearse())
+	}
+	
+	test "viajeInteresanteCiudadTRropical1" {
+		assert.notThat(ciudadTropical1.viajeInteresante())
+	}
+	
+	test "viajeInteresanteCiudadTropical2" {
+		assert.that(ciudadTropical2.viajeInteresante())
+	}
+	
+	test "viajeInteresanteCiudadTropical3" {
+		ciudadTropical3.cantidadDeAtracciones(5)
+		assert.that(ciudadTropical3.viajeInteresante())
+	}
+}

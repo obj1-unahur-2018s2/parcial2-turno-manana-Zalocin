@@ -1,0 +1,72 @@
+import viajes.*
+
+describe "tests salidaDeTrekking" {
+	var trekking1 = new SalidaDeTrekking()
+	var trekking2 = new SalidaDeTrekking()
+	var trekking3 = new SalidaDeTrekking()
+	
+	fixture {
+		trekking1.kmDeSenderos(100)
+		trekking2.kmDeSenderos(50)
+		trekking3.kmDeSenderos(250)
+			
+		trekking1.diasDeSolPorAnio(130)
+		trekking2.diasDeSolPorAnio(240)
+		trekking3.diasDeSolPorAnio(130)
+		
+		trekking1.agregarIdioma("Español")
+		trekking2.agregarIdiomas(#{"Español","Ingles"})
+		trekking3.agregarIdioma("Español")
+
+	}
+
+	test "diasSalidaDeTrekking1" {
+		assert.equals(100/50, trekking1.diasDeActividad())
+	}
+	
+	test "diasSalidaDeTrekking2" {
+		assert.equals(50/50, trekking2.diasDeActividad())
+	}
+	
+	test "diasSalidaDeTrekking3" {
+		assert.equals(250/50, trekking3.diasDeActividad())
+	}
+	
+	test "implicaEsfuerzoSalidaDeTrekking1" {
+		assert.that(trekking1.implicaEsfuerzo())
+	}
+	
+	test "implicaEsfuerzoSalidaDeTrekking2" {
+		assert.notThat(trekking2.implicaEsfuerzo())
+	}
+	
+	test "implicaEsfuerzoSalidaDeTrekking3" {
+		assert.that(trekking3.implicaEsfuerzo())
+	}
+	
+	test "sirveParaBroncearseSalidaDeTrekking1" {
+		assert.notThat(trekking1.sirveParaBroncearse())
+	}
+	
+	test "sirveParaBroncearseSalidaDeTrekking2" {
+		assert.that(trekking2.sirveParaBroncearse())
+	}
+	
+	test "sirveParaBroncearseSalidaDeTrekking3" {
+		assert.that(trekking3.sirveParaBroncearse())
+	}
+	
+	test "viajeInteresanteSalidaDeTrekking1" {
+		assert.notThat(trekking1.viajeInteresante())
+	}
+	
+	test "viajeInteresanteSalidaDeTrekking2" {
+		assert.that(trekking2.viajeInteresante())
+	}
+	
+	test "viajeInteresanteSalidaDeTrekking3" {
+		trekking3.diasDeSolPorAnio(141)
+		assert.notThat(trekking3.viajeInteresante())
+	}
+	
+}
